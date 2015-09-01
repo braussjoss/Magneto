@@ -41,94 +41,93 @@ public class MutantDetector {
         {
             return false;
         }
-        
+
         //Conversion a Arreglo Bidimensional
         for(int i=0;i<n; i++)
         {
-            for(int j=0;j<dna[0].length();j++)
+            for(int j=0;j<dna[i].length();j++)
             {
                 dnaArray[i][j] = dna[i].charAt(j);
-                //System.out.println("Arr: ["+i+"]["+j+"] = "+dnaArray[i][j]);
-                System.out.print(dnaArray[i][j]);
             }
-            System.out.println("");
         }
-        
-        //Validacion de Horizontales
         for(int i=0; i<n; i++)
         {
-            for(int j=0; j<=m-4; j++)
+            for(int j=0; j<m; j++)
             {
-                if(dnaArray[i][j]==dnaArray[i][j+1] && 
-                      dnaArray[i][j+1]==dnaArray[i][j+2] &&
-                      dnaArray[i][j+2]==dnaArray[i][j+3])
+                //Validacion de Verticales
+                if(i<=n-4)
                 {
-                    dnaMutante.add(dnaArray[i][j]+dnaArray[i][j+1]+dnaArray[i][j+2]+dnaArray[i][j+3]+
-                            " Posiciones: "+
-                            i+","+j+"; "+i+","+(j+1)+"; "+i+","+(j+2)+"; "+i+","+(j+3)+"; ");
-                    esMutante = true;
+                    if(dnaArray[i][j]==dnaArray[i+1][j] && 
+                          dnaArray[i+1][j]==dnaArray[i+2][j] &&
+                          dnaArray[i+2][j]==dnaArray[i+3][j])
+                    {
+                        // <editor-fold defaultstate="collapsed" desc="codigoExtraParaImpresionDeLineasMutantes">
+                             dnaMutante.add(dnaArray[i][j]+""+dnaArray[i+1][j]+""+dnaArray[i+2][j]+""+dnaArray[i+3][j]+
+                                " VV: "+
+                                i+","+j+"; "+(i+1)+","+(j)+"; "+(i+2)+","+(j)+"; "+(i+3)+","+(j)+"; ");
+                        // </editor-fold>
+                        esMutante = true;
+                    }
+                }
+                if(j<=m-4)
+                {
+                    //Validacion de Horizontales
+                    if(dnaArray[i][j]==dnaArray[i][j+1] && 
+                          dnaArray[i][j+1]==dnaArray[i][j+2] &&
+                          dnaArray[i][j+2]==dnaArray[i][j+3])
+                    {
+                        // <editor-fold defaultstate="collapsed" desc="codigoExtraParaImpresionDeLineasMutantes">
+                        dnaMutante.add(dnaArray[i][j]+""+dnaArray[i][j+1]+""+dnaArray[i][j+2]+""+dnaArray[i][j+3]+
+                                " HH: "+
+                                i+","+j+"; "+i+","+(j+1)+"; "+i+","+(j+2)+"; "+i+","+(j+3)+"; ");
+                        //</editor-fold>
+                        esMutante = true;
+                    }
+                }
+                
+                if(j<=m-4 && i<=n-4)
+                {
+                    //Validacion de Oblicuas 1
+                    if(dnaArray[i][j]==dnaArray[i+1][j+1] && 
+                                dnaArray[i+1][j+1]==dnaArray[i+2][j+2] &&
+                                dnaArray[i+2][j+2]==dnaArray[i+3][j+3])
+                    {
+                        // <editor-fold defaultstate="collapsed" desc="codigoExtraParaImpresionDeLineasMutantes">
+                        dnaMutante.add(dnaArray[i][j]+""+dnaArray[i+1][j+1]+""+dnaArray[i+2][j+2]+""+dnaArray[i+3][j+3]+
+                                " O1: "+
+                                i+","+j+"; "+(i+1)+","+(j+1)+"; "+(i+2)+","+(j+2)+"; "+(i+3)+","+(j+3)+"; ");
+                        //</editor-fold>
+                        esMutante = true;
+                    }
+                }
+               
+            }
+            if(i<=n-4)
+            {
+                //Validacion de Oblicuas 2
+                for(int j=m-1; j>=3; j--)
+                {
+                    if(dnaArray[i][j]==dnaArray[i+1][j-1] && 
+                          dnaArray[i+1][j-1]==dnaArray[i+2][j-2] &&
+                          dnaArray[i+2][j-2]==dnaArray[i+3][j-3])
+                    {
+                        // <editor-fold defaultstate="collapsed" desc="codigoExtraParaImpresionDeLineasMutantes">
+                        dnaMutante.add(dnaArray[i][j]+""+dnaArray[i+1][j-1]+""+dnaArray[i+2][j-2]+""+dnaArray[i+3][j-3]+
+                                " O2: "+
+                                i+","+j+"; "+(i+1)+","+(j-1)+"; "+(i+2)+","+(j-2)+"; "+(i+3)+","+(j-3)+"; ");
+                        //</editor-fold>
+                        esMutante = true;
+                    }
                 }
             }
         }
-        
-        //Validacion de Verticales
-        for(int i=0; i<m; i++)
-        {
-            for(int j=0; j<=n-4; j++)
-            {
-                if(dnaArray[i][j]==dnaArray[i][j+1] && 
-                      dnaArray[i][j+1]==dnaArray[i][j+2] &&
-                      dnaArray[i][j+2]==dnaArray[i][j+3])
-                {
-                    dnaMutante.add(dnaArray[i][j]+dnaArray[i][j+1]+dnaArray[i][j+2]+dnaArray[i][j+3]+
-                            " Posiciones: "+
-                            j+","+i+"; "+(j+1)+","+(i)+"; "+(j+2)+","+i+"; "+(j+3)+","+i+"; ");
-                    esMutante = true;
-                }
-            }
-        }
-        
-        //Validacion de Oblicuas 1.
-        for(int i=0; i<=n-4; i++)
-        {
-            for(int j=0; j<=m-4; j++)
-            {
-                if(dnaArray[i][j]==dnaArray[i+1][j+1] && 
-                      dnaArray[i+1][j+1]==dnaArray[i+2][j+2] &&
-                      dnaArray[i+2][j+2]==dnaArray[i+3][j+3])
-                {
-                    dnaMutante.add(dnaArray[i][j]+dnaArray[i+1][j+1]+dnaArray[i+2][j+2]+dnaArray[i+3][j+3]+
-                            " Posiciones: "+
-                            i+","+j+"; "+(i+1)+","+(j+1)+"; "+(i+2)+","+(j+2)+"; "+(i+3)+","+(j+3)+"; ");
-                    esMutante = true;
-                }
-            }
-        }
-        
-        //Validacion de Oblicuas 2.
-        for(int i=0; i<=n-4; i++)
-        {
-            for(int j=m-1; j>=3; j--)
-            {
-                if(dnaArray[i][j]==dnaArray[i+1][j-1] && 
-                      dnaArray[i+1][j-1]==dnaArray[i+2][j-2] &&
-                      dnaArray[i+2][j-2]==dnaArray[i+3][j-3])
-                {
-                    dnaMutante.add(dnaArray[i][j]+dnaArray[i+1][j-1]+dnaArray[i+2][j-2]+dnaArray[i+3][j-3]+
-                            " Posiciones: "+
-                            i+","+j+"; "+(i+1)+","+(j-1)+"; "+(i+2)+","+(j-2)+"; "+(i+3)+","+(j-3)+"; ");
-                    esMutante = true;
-                }
-            }
-        }
-        
-        System.out.println("Lineas Mutantes");
+        // <editor-fold defaultstate="collapsed" desc="codigoExtraParaImpresionDeLineasMutantes">
+        System.out.println("Lineas Mutantes: "+dnaMutante.size());
         for(String s : dnaMutante)
         {
             System.out.println(s);
         }
-        
+        //</editor-fold>
         return esMutante;
     }
-
 }
