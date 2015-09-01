@@ -36,6 +36,7 @@ public class MutantDetector {
         char[][] dnaArray = new char[n][m];
         ArrayList<String> dnaMutante = new ArrayList<>();
         boolean esMutante = false;
+        int contadorADN = 0;
         if(n<4 || m <4)
             //Si el tamaño del dna es menor a 4, entonces no es mutante.
         {
@@ -66,7 +67,7 @@ public class MutantDetector {
                                 " VV: "+
                                 i+","+j+"; "+(i+1)+","+(j)+"; "+(i+2)+","+(j)+"; "+(i+3)+","+(j)+"; ");
                         // </editor-fold>
-                        esMutante = true;
+                        contadorADN++;
                     }
                 }
                 if(j<=m-4)
@@ -81,7 +82,7 @@ public class MutantDetector {
                                 " HH: "+
                                 i+","+j+"; "+i+","+(j+1)+"; "+i+","+(j+2)+"; "+i+","+(j+3)+"; ");
                         //</editor-fold>
-                        esMutante = true;
+                        contadorADN++;
                     }
                 }
                 
@@ -97,7 +98,7 @@ public class MutantDetector {
                                 " O1: "+
                                 i+","+j+"; "+(i+1)+","+(j+1)+"; "+(i+2)+","+(j+2)+"; "+(i+3)+","+(j+3)+"; ");
                         //</editor-fold>
-                        esMutante = true;
+                        contadorADN++;
                     }
                 }
                
@@ -116,10 +117,14 @@ public class MutantDetector {
                                 " O2: "+
                                 i+","+j+"; "+(i+1)+","+(j-1)+"; "+(i+2)+","+(j-2)+"; "+(i+3)+","+(j-3)+"; ");
                         //</editor-fold>
-                        esMutante = true;
+                        contadorADN++;
                     }
                 }
             }
+        }
+        if(contadorADN>1)
+        {
+             esMutante = true;
         }
         // <editor-fold defaultstate="collapsed" desc="codigoExtraParaImpresionDeLineasMutantes">
         System.out.println("Lineas Mutantes: "+dnaMutante.size());
