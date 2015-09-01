@@ -101,13 +101,9 @@ public class MutantDetector {
                         contadorADN++;
                     }
                 }
-               
-            }
-            if(i<=n-4)
-            {
-                //Validacion de Oblicuas 2
-                for(int j=m-1; j>=3; j--)
+                if(i<=2 && j>=3)
                 {
+                    //Validacion de Oblicuas 2
                     if(dnaArray[i][j]==dnaArray[i+1][j-1] && 
                           dnaArray[i+1][j-1]==dnaArray[i+2][j-2] &&
                           dnaArray[i+2][j-2]==dnaArray[i+3][j-3])
@@ -127,7 +123,7 @@ public class MutantDetector {
              esMutante = true;
         }
         // <editor-fold defaultstate="collapsed" desc="codigoExtraParaImpresionDeLineasMutantes">
-        System.out.println("Lineas Mutantes: "+dnaMutante.size());
+        System.out.println("Secuencias Mutantes: "+dnaMutante.size());
         for(String s : dnaMutante)
         {
             System.out.println(s);
